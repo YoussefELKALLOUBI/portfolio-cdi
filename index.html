@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youssef El-kalloubi - Developer Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .terminal {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #161b22;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+            box-shadow: 0 16px 32px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #21262d;
+            padding: 12px 20px;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .btn.close { background: #ff5f56; }
+        .btn.minimize { background: #ffbd2e; }
+        .btn.maximize { background: #27ca3f; }
+
+        .terminal-title {
+            margin-left: 12px;
+            color: #7d8590;
+            font-size: 0.9em;
+        }
+
+        .terminal-content {
+            padding: 30px;
+        }
+
+        .prompt {
+            color: #58a6ff;
+            margin-bottom: 20px;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .section {
+            margin-bottom: 40px;
+            border-left: 2px solid #21262d;
+            padding-left: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .section:hover {
+            border-left-color: #58a6ff;
+        }
+
+        .section-title {
+            color: #f85149;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '>';
+            color: #58a6ff;
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #0d1117 0%, #21262d 100%);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid #30363d;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #58a6ff, #7c3aed);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: 700;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #58a6ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .role {
+            color: #7c3aed;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            background: #1a7f37;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 8px;
+            height: 8px;
+            background: #1a7f37;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #1a7f37;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .contact-item {
+            background: #21262d;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: #58a6ff;
+            transform: translateY(-2px);
+        }
+
+        .contact-label {
+            color: #7d8590;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .contact-value {
+            color: #f0f6fc;
+            font-weight: 600;
+        }
+
+        .experience-item {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(45deg, #58a6ff, #7c3aed);
+        }
+
+        .experience-item:hover {
+            border-color: #58a6ff;
+            transform: translateX(4px);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .job-title {
+            color: #58a6ff;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        .job-period {
+            background: #f85149;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            white-space: nowrap;
+        }
+
+        .company {
+            color: #7c3aed;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .achievements {
+            margin: 15px 0;
+        }
+
+        .achievement {
+            color: #c9d1d9;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .achievement::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #1a7f37;
+            font-weight: 700;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: #f85149;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.8em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-tag:hover {
+            background: #58a6ff;
+            transform: scale(1.05);
+        }
+
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .skill-group {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-group:hover {
+            border-color: #58a6ff;
+        }
+
+        .skill-group h4 {
+            color: #58a6ff;
+            margin-bottom: 15px;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-item {
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            border: 1px solid #30363d;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item.master {
+            background: #f85149;
+            color: white;
+            border-color: #f85149;
+        }
+
+        .skill-item:hover {
+            border-color: #58a6ff;
+            background: #58a6ff;
+            color: white;
+        }
+
+        .education-item {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .education-item:hover {
+            border-color: #7c3aed;
+        }
+
+        .degree {
+            color: #7c3aed;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .school {
+            color: #c9d1d9;
+            margin: 5px 0;
+        }
+
+        .grade {
+            color: #1a7f37;
+            font-size: 0.9em;
+        }
+
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid #58a6ff;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #58a6ff; }
+        }
+
+        .terminal-command {
+            color: #7d8590;
+            margin-bottom: 10px;
+        }
+
+        .command-output {
+            color: #1a7f37;
+            margin-left: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #58a6ff;
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #58a6ff;
+            display: block;
+        }
+
+        .stat-label {
+            color: #7d8590;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .detailed-description {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .terminal {
+                margin: 10px;
+            }
+            
+            .terminal-content {
+                padding: 20px;
+            }
+            
+            .name {
+                font-size: 2em;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="btn close"></div>
+                <div class="btn minimize"></div>
+                <div class="btn maximize"></div>
+            </div>
+            <div class="terminal-title">youssef@dev-portfolio:~$</div>
+        </div>
+
+        <div class="terminal-content">
+            <div class="prompt">$ cat ./profile.json<span class="cursor">|</span></div>
+
+            <div class="header-section">
+                <div class="avatar">YE</div>
+                <h1 class="name typing-animation">Youssef El-kalloubi</h1>
+                <p class="role">class FullStackDeveloper extends JavaMaster</p>
+                <div class="status">🟢 Disponible pour CDI - Sept 2025</div>
+            </div>
+
+            <div class="code-block">
+                <div class="terminal-command">$ whoami</div>
+                <div class="command-output">
+{<br>
+&nbsp;&nbsp;"name": "Youssef El-kalloubi",<br>
+&nbsp;&nbsp;"age": 23,<br>
+&nbsp;&nbsp;"role": "Junior Fullstack Developer",<br>
+&nbsp;&nbsp;"experience": "2+ years",<br>
+&nbsp;&nbsp;"education": "Master MIAGE (alternance)",<br>
+&nbsp;&nbsp;"specialization": "Java, C#, C++, Python",<br>
+&nbsp;&nbsp;  "statut": "recherche_cdi",<br>
+&nbsp;&nbsp;"mobilite": "toute_la_france"<br>
+}
+                </div>
+            </div>
+
+            <section class="section">
+                <h2 class="section-title">contact.info</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-label">phone</div>
+                        <div class="contact-value">06 16 10 81 91</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">email</div>
+                        <div class="contact-value">youssefelkalloubi54@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">linkedin</div>
+                        <div class="contact-value">@youssef-el-kalloubi</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">license</div>
+                        <div class="contact-value">Permis B - France</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">stats.summary</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">5</span>
+                        <div class="stat-label">Années d'études</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">2</span>
+                        <div class="stat-label">Ans d'expérience</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">4</span>
+                        <div class="stat-label">Expériences pro</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">15+</span>
+                        <div class="stat-label">Technologies</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">experience.log</h2>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Développeur Logiciel C#/C++ (Alternance)</div>
+                            <div class="company">Phileas Technologie • Master 2 MIAGE</div>
+                        </div>
+                        <div class="job-period">2024/25 • 12 mois</div>
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement">Résolution de bugs en production d'un logiciel de vidéosurveillance</div>
+                        <div class="detailed-description">
+                            • Perte de flux vidéo en direct, problèmes de décodage<br>
+                            • Intervention directe sur les machines clients<br>
+                            • Développement et tests de nouvelles DLL/EXE<br>
+                            • Préparation de patchs correctifs
+                        </div>
+                        <div class="achievement">Analyse et relecture de code C++ : Détection et correction de fuites de mémoire</div>
+                        <div class="achievement">Maintenance évolutive de l'application mobile associée</div>
+                        <div class="achievement">Tests et validation des correctifs en conditions réelles</div>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">.NET</span>
+                        <span class="tech-tag">WinForms</span>
+                        <span class="tech-tag">Cordova</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Développeur Python Django (Alternance)</div>
+                            <div class="company">Sylvamap • Master 1 MIAGE</div>
+                        </div>
+                        <div class="job-period">2023/24 • 12 mois</div>
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement">Intégration complète d'une double authentification par SMS (2FA)</div>
+                        <div class="detailed-description">
+                            • Sans bibliothèque externe<br>
+                            • Analyse, conception, développement<br>
+                            • Tests techniques et fonctionnels complets
+                        </div>
+                        <div class="achievement">Ajout de fonctionnalités liées à la gestion des droits d'accès</div>
+                        <div class="achievement">Gestion des dossiers et des dessins géo</div>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Unittest</span>
+                        <span class="tech-tag">Ionic</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Développeur Ruby (Stage)</div>
+                            <div class="company">WebConcepter</div>
+                        </div>
+                        <div class="job-period">2022 • 6 sem</div>
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement">Développement d'une API pour suivre la présence des techniciens sur chantier</div>
+                        <div class="achievement">Réalisation de tests avec Postman (CRUD complet)</div>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Ruby on Rails</span>
+                        <span class="tech-tag">Ruby</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Postman</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Développeur Front-end (Stage découverte)</div>
+                            <div class="company">ONIRIS</div>
+                        </div>
+                        <div class="job-period">2021 • 5 sem</div>
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement">Évolution du portail informatique de l'école ONIRIS</div>
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">skills.matrix</h2>
+                <div class="skills-matrix">
+                    <div class="skill-group">
+                        <h4>🔥 Langages POO</h4>
+                        <div class="skill-list">
+                            <span class="skill-item master">JAVA</span>
+                            <span class="skill-item">PYTHON</span>
+                            <span class="skill-item">C++</span>
+                            <span class="skill-item">C#</span>
+                            <span class="skill-item">PHP</span>
+                            <span class="skill-item">RUBY</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <h4>🌐 Web & Frameworks</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">HTML</span>
+                            <span class="skill-item">CSS</span>
+                            <span class="skill-item">JavaScript</span>
+                            <span class="skill-item">.NET</span>
+                            <span class="skill-item">Django</span>
+                            <span class="skill-item">Angular</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <h4>🗄️ Databases & BI</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">Oracle</span>
+                            <span class="skill-item">PostgreSQL</span>
+                            <span class="skill-item">MongoDB</span>
+                            <span class="skill-item">SQL/PL-SQL</span>
+                            <span class="skill-item">Power BI</span>
+                            <span class="skill-item">Talend</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <h4>🚀 Microservices & API</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">Spring Boot</span>
+                            <span class="skill-item">REST</span>
+                            <span class="skill-item">RabbitMQ</span>
+                            <span class="skill-item">Consul</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <h4>🧪 Testing & Quality</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">JUnit</span>
+                            <span class="skill-item">Mockito</span>
+                            <span class="skill-item">Selenium</span>
+                            <span class="skill-item">Postman</span>
+                            <span class="skill-item">SOAP UI</span>
+                            <span class="skill-item">Unittest</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-group">
+                        <h4>⚙️ DevOps & Tools</h4>
+                        <div class="skill-list">
+                            <span class="skill-item">Git</span>
+                            <span class="skill-item">Docker</span>
+                            <span class="skill-item">Azure</span>
+                            <span class="skill-item">Maven</span>
+                            <span class="skill-item">Ionic</span>
+                            <span class="skill-item">Cordova</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">education.history</h2>
+                
+                <div class="education-item">
+                    <div class="degree">Master 2 MIAGE en alternance</div>
+                    <div class="school">Parcours Systèmes d'Information des Métiers du Social, de l'Assurance et de la Banque</div>
+                    <div class="school">Université d'Orléans – Phileas Technologie</div>
+                    <div class="grade">2024/25 • En cours</div>
+                </div>
+
+                <div class="education-item">
+                    <div class="degree">Master 1 MIAGE en alternance</div>
+                    <div class="school">Université d'Orléans – Sylvamap</div>
+                    <div class="grade">2023/24</div>
+                </div>
+
+                <div class="education-item">
+                    <div class="degree">Licence MIAGE</div>
+                    <div class="school">Méthodes Informatiques Appliquées à la Gestion des Entreprises</div>
+                    <div class="school">Université d'Orléans</div>
+                    <div class="grade">2022/23 • Moyenne: 13,70</div>
+                </div>
+
+                <div class="education-item">
+                    <div class="degree">BTS SIO option SLAM</div>
+                    <div class="school">La Joliverie - Nantes</div>
+                    <div class="grade">2020/22 • Moyenne: 13,50</div>
+                </div>
+
+                <div class="education-item">
+                    <div class="degree">Baccalauréat Physique-Chimie</div>
+                    <div class="school">Lycée Wed Elmakhazen</div>
+                    <div class="grade">2019/20 • Moyenne: 15,45</div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">sectors.expertise</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">🗺️ Géomatique</span>
+                    <span class="tech-tag">📹 Vidéosurveillance</span>
+                    <span class="tech-tag">💰 Retraite</span>
+                    <span class="tech-tag">₿ Cryptomonnaie</span>
+                    <span class="tech-tag">🏛️ Assurance</span>
+                    <span class="tech-tag">🏦 Banque</span>
+                </div>
+            </section>
+
+            <div class="code-block">
+                <div class="terminal-command">$ echo "Ready for new challenges!"</div>
+                <div class="command-output">
+🚀 Recherche active CDI - Septembre 2025<br>
+🎯 Spécialisation Java & développement fullstack<br>
+🌍 Mobilité sur toute la France<br>
+💼 5 ans d'études axées sur Java<br>
+📈 2 ans d'expérience entreprise + 2 stages<br>
+🔧 Expert en résolution de bugs production & optimisation<br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animation de frappe au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation des cartes au scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observer toutes les cartes
+            document.querySelectorAll('.experience-item, .education-item, .skill-group').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Click interactif sur les tags tech
+            document.querySelectorAll('.tech-tag, .skill-item').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    this.style.animation = 'pulse 0.6s ease';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 600);
+                });
+            });
+
+            // Animation typing pour le nom
+            setTimeout(() => {
+                document.querySelector('.typing-animation').style.animation = 'none';
+                document.querySelector('.typing-animation').style.borderRight = 'none';
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
