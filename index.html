@@ -488,6 +488,39 @@
                 align-items: flex-start;
             }
         }
+
+
+
+        .cv-download {
+            background: linear-gradient(135deg, #f85149, #58a6ff);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cv-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(248, 81, 73, 0.3);
+        }
+
+        .cv-download:active {
+            transform: translateY(0);
+        }
+
+        .cv-icon {
+            font-size: 1.2em;
+        }
+
+        
     </style>
 </head>
 <body>
@@ -510,6 +543,24 @@
                 <p class="role">class FullStackDeveloper extends JavaMaster</p>
                 <div class="status">🟢 Disponible pour CDI - Sept 2025</div>
             </div>
+
+            <div class="code-block">
+                <div class="terminal-command">$ ls -la documents/</div>
+                <div class="command-output">
+                    📄 CV_Youssef_El-kalloubi_2025.pdf<br>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="./CV_Youssef_El-kalloubi.pdf" class="cv-download" target="_blank">
+                            <span class="cv-icon">👁️</span>
+                            Voir CV
+                        </a>
+                        <a href="./CV_Youssef_El-kalloubi.pdf" class="cv-download" target="_blank" download="CV_Youssef_El-kalloubi.pdf">
+                            <span class="cv-icon">📥</span>
+                            Télécharger
+                        </a>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="code-block">
                 <div class="terminal-command">$ whoami</div>
