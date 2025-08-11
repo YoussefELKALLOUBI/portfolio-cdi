@@ -488,9 +488,6 @@
                 align-items: flex-start;
             }
         }
-
-
-
         .cv-download {
             background: linear-gradient(135deg, #f85149, #58a6ff);
             color: white;
@@ -502,24 +499,40 @@
             gap: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
-            margin: 20px 0;
+            margin: 5px 0;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
+        
         .cv-download:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(248, 81, 73, 0.3);
+            text-decoration: none;
+            color: white;
         }
-
+        
         .cv-download:active {
             transform: translateY(0);
         }
-
+        
         .cv-icon {
             font-size: 1.2em;
         }
-
+        
+        /* Animations pour les boutons sociaux */
+        .cv-download:nth-child(3):hover { /* LinkedIn */
+            box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+        }
+        
+        .cv-download:nth-child(4):hover { /* GitHub */
+            box-shadow: 0 8px 25px rgba(51, 51, 51, 0.4);
+        }
+        
+        .cv-download:nth-child(5):hover { /* Instagram */
+            box-shadow: 0 8px 25px rgba(228, 64, 95, 0.4);
+        }
+        
         
     </style>
 </head>
@@ -545,18 +558,43 @@
             </div>
 
             <div class="code-block">
-                <div class="terminal-command">$ ls -la documents/</div>
+                <div class="terminal-command">$ ls -la documents/ && cat social_links.json</div>
                 <div class="command-output">
                     📄 CV_Youssef_El-kalloubi_2025.pdf<br>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <a href="./CV_Youssef_El-kalloubi.pdf" class="cv-download" target="_blank">
-                            <span class="cv-icon">👁️</span>
-                            Voir CV
-                        </a>
-                        <a href="./CV_Youssef_El-kalloubi.pdf" class="cv-download" target="_blank" download="CV_Youssef_El-kalloubi.pdf">
-                            <span class="cv-icon">📥</span>
-                            Télécharger
-                        </a>
+                    🔗 social_links.json<br><br>
+                    
+                    <!-- Section CV -->
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #58a6ff; font-weight: 600; margin-bottom: 10px;">📋 CURRICULUM VITAE</div>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a href="./CV_Youssef_El-kalloubi.pdf" class="cv-download" target="_blank">
+                                <span class="cv-icon">👁️</span>
+                                Voir CV
+                            </a>
+                            <a href="./CV_Youssef_El-kalloubi.pdf" class="cv-download" target="_blank" download="CV_Youssef_El-kalloubi.pdf">
+                                <span class="cv-icon">📥</span>
+                                Télécharger CV
+                            </a>
+                        </div>
+                    </div>
+            
+                    <!-- Section Réseaux Sociaux -->
+                    <div>
+                        <div style="color: #7c3aed; font-weight: 600; margin-bottom: 10px;">🌐 RÉSEAUX & PROJETS</div>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a href="https://linkedin.com/in/youssef-el-kalloubi" class="cv-download" target="_blank" style="background: linear-gradient(135deg, #0077b5, #00a0dc);">
+                                <span class="cv-icon">💼</span>
+                                LinkedIn
+                            </a>
+                            <a href="https://github.com/youssef-el-kalloubi" class="cv-download" target="_blank" style="background: linear-gradient(135deg, #333, #666);">
+                                <span class="cv-icon">⚡</span>
+                                GitHub
+                            </a>
+                            <a href="https://instagram.com/youssef.el.kalloubi" class="cv-download" target="_blank" style="background: linear-gradient(135deg, #e4405f, #fd5949, #fccc63);">
+                                <span class="cv-icon">📸</span>
+                                Instagram
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
