@@ -532,7 +532,49 @@
         .cv-download:nth-child(5):hover { /* Instagram */
             box-shadow: 0 8px 25px rgba(228, 64, 95, 0.4);
         }
+        .avatar-photo {
+            padding: 0;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, #58a6ff, #7c3aed);
+            background-clip: padding-box;
+        }
         
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .avatar-photo:hover .avatar-img {
+            transform: scale(1.1);
+        }
+        
+        /* Animation plus fluide pour la photo */
+        .avatar-photo {
+            animation: photoHover 3s ease-in-out infinite;
+        }
+        
+        @keyframes photoHover {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
+            }
+        }
+        
+        /* Responsive pour mobile */
+        @media (max-width: 768px) {
+            .avatar {
+                width: 80px;
+                height: 80px;
+            }
+        }
         
     </style>
 </head>
